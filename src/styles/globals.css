@@ -2,26 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+#gr_grid_widget_1725799722 > h2, #gr_grid_widget_1725799722 .gr_grid_branding {
+    @apply hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+#gr_grid_widget_1725799722 .gr_grid_container {
+    @apply grid grid-cols-3 lg:grid-cols-4 gap-2;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+#gr_grid_widget_1725799722 .gr_grid_container .gr_grid_book_container img {
+    @apply rounded overflow-hidden w-full h-full object-cover transition hover:scale-105 shadow-md shadow-gray-400;
 }
