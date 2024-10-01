@@ -16,7 +16,7 @@ export default function Home() {
           <p className="text-lg md:text-xl">
             <a href="https://www.linkedin.com/in/judith-malena-schmidt/" target="_blank" className="underline">LinkedIn</a>
             {" · "}
-            <a href="https://github.com/Lena205" target="_blank" className="underline">GitHub</a>
+            <a href="https://github.com/Malena205" target="_blank" className="underline">GitHub</a>
           </p>
         </div>
       </div>
