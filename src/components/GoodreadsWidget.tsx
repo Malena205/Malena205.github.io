@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const GoodreadsWidget = () => {
   const widgetRef = useRef<HTMLDivElement | null>(null);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -10,6 +11,10 @@ const GoodreadsWidget = () => {
     script.async = true;
     script.type = "text/javascript";
     script.charset = "utf-8";
+    
+    script.onload = () => {
+      setIsLoading(false);
+    };
 
     scriptRef.current = script;
 
@@ -25,9 +30,22 @@ const GoodreadsWidget = () => {
   }, []);
 
   return (
-    <div id="gr_grid_widget_1725799722" ref={widgetRef}>
-      {/* The Goodreads widget will be inserted here */}
-    </div>
+    <>
+      {isLoading && (
+        <div className="grid grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-4">
+          {[...Array(12)].map((_, index) => (
+            <div 
+              key={index}
+              className={`aspect-[2/3] rounded bg-gray-200 animate-pulse`}
+              style={{ animationDelay: `${index * 100}ms` }}
+            />
+          ))}
+        </div>
+      )}
+      <div id="gr_grid_widget_1725799722" ref={widgetRef} className={isLoading ? 'hidden' : ''}>
+        {/* The Goodreads widget will be inserted here */}
+      </div>
+    </>
   );
 };
 
