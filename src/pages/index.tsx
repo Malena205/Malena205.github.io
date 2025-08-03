@@ -7,7 +7,7 @@ export default function Home() {
       <div className='grid sm:grid-cols-[1fr_2fr] gap-4 md:gap-8'>
         <img
           className="w-64 max-w-full sm:w-full rounded-xl aspect-square"
-          src="/profile-pic.jpg"
+          src="/profile-pic.jpeg"
           alt="Headshot of Malena Schmidt"
         />
         <div className='space-y-4'>
