@@ -1,5 +1,20 @@
 [
   {
+    "name": "Doppelkopf",
+    "href": "https://boardgamegeek.com/boardgame/9364",
+    "imgSrc": "https://cf.geekdo-images.com/MqzQb4m-biiE2BqVKdG6Gg__original/img/0U5jQwRWOqci1Udk48cvZD9bOPk=/0x0/filters:format(jpeg)/pic210953.jpg"
+  },
+  {
+    "name": "Jungo",
+    "href": "https://boardgamegeek.com/boardgame/424816",
+    "imgSrc": "https://cf.geekdo-images.com/-s3g7tvzTk-aylhc7Uy2pw__original/img/YbvrXrUv8NcSLT1o7_YEQPUtwU8=/0x0/filters:format(png)/pic8918687.png"
+  },
+  {
+    "name": "Nokosu Dice",
+    "href": "https://boardgamegeek.com/boardgame/294693",
+    "imgSrc": "https://cf.geekdo-images.com/lbtoLuxIdsY82pJydTZVBQ__original/img/172KzAcd9ogmu9qjj_n0qeUrgUo=/0x0/filters:format(jpeg)/pic5069035.jpg"
+  },
+  {
     "name": "さいころ民主主義: デメクラシー (Dice Democracy)",
     "href": "https://boardgamegeek.com/boardgame/447621",
     "imgSrc": "https://cf.geekdo-images.com/z293gQQqGzmykaJBVDBKZg__original/img/WA5eE0ldhHHw-CxTSik3x_SQ6jY=/0x0/filters:format(png)/pic8945411.png"
@@ -43,20 +58,5 @@
     "name": "Mountain Goats",
     "href": "https://boardgamegeek.com/boardgame/63975",
     "imgSrc": "https://cf.geekdo-images.com/p4DD5TGFNFQy_ayFtT-x_A__original/img/o8zVhEu7BaQo1sE9jH-yu2YBE_4=/0x0/filters:format(jpeg)/pic5313595.jpg"
-  },
-  {
-    "name": "The Quest for El Dorado",
-    "href": "https://boardgamegeek.com/boardgame/217372",
-    "imgSrc": "https://cf.geekdo-images.com/b5VyYjNfAxJ4Z-Dx2UWlqg__original/img/-GqQ0EOfg9e3yFVpKgJbPdlunso=/0x0/filters:format(jpeg)/pic7945692.jpg"
-  },
-  {
-    "name": "Scholars of the South Tigris",
-    "href": "https://boardgamegeek.com/boardgame/367041",
-    "imgSrc": "https://cf.geekdo-images.com/z_paoUYMDZ__bnm_Boq8AA__original/img/cr0IWHice36TsraMMEzJkxrd048=/0x0/filters:format(png)/pic6966624.png"
-  },
-  {
-    "name": "Sky Team",
-    "href": "https://boardgamegeek.com/boardgame/373106",
-    "imgSrc": "https://cf.geekdo-images.com/uXMeQzNenHb3zK7Hoa6b2w__original/img/mWOQnkpyYBorh_Y1-0Y2o-ew17k=/0x0/filters:format(jpeg)/pic7398904.jpg"
   }
 ]
