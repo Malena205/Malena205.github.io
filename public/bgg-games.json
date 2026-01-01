@@ -1,5 +1,10 @@
 [
   {
+    "name": "Arcs",
+    "href": "https://boardgamegeek.com/boardgame/359871",
+    "imgSrc": "https://cf.geekdo-images.com/XWImAu_3RK61wbzcKboVdA__original/img/43ianMZOks7UHlZILx0VBRntOmM=/0x0/filters:format(png)/pic8145530.png"
+  },
+  {
     "name": "7 Wonders",
     "href": "https://boardgamegeek.com/boardgame/68448",
     "imgSrc": "https://cf.geekdo-images.com/35h9Za_JvMMMtx_92kT0Jg__original/img/jt70jJDZ1y1FWJs4ZQf5FI8APVY=/0x0/filters:format(jpeg)/pic7149798.jpg"
@@ -53,10 +58,5 @@
     "name": "Jungo",
     "href": "https://boardgamegeek.com/boardgame/424816",
     "imgSrc": "https://cf.geekdo-images.com/-s3g7tvzTk-aylhc7Uy2pw__original/img/YbvrXrUv8NcSLT1o7_YEQPUtwU8=/0x0/filters:format(png)/pic8918687.png"
-  },
-  {
-    "name": "Nokosu Dice",
-    "href": "https://boardgamegeek.com/boardgame/294693",
-    "imgSrc": "https://cf.geekdo-images.com/lbtoLuxIdsY82pJydTZVBQ__original/img/172KzAcd9ogmu9qjj_n0qeUrgUo=/0x0/filters:format(jpeg)/pic5069035.jpg"
   }
 ]
