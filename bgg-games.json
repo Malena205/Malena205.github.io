@@ -1,5 +1,10 @@
 [
   {
+    "name": "SCOUT",
+    "href": "https://boardgamegeek.com/boardgame/291453",
+    "imgSrc": "https://cf.geekdo-images.com/cf0xxkevbwTGF3VUZymKjg__original/img/vkElrRCPJxy7Q3TH9olpq20egA4=/0x0/filters:format(png)/pic6398727.png"
+  },
+  {
     "name": "Cascadia",
     "href": "https://boardgamegeek.com/boardgame/295947",
     "imgSrc": "https://cf.geekdo-images.com/MjeJZfulbsM1DSV3DrGJYA__original/img/B374C04Eip7fmQBGJzgiOTp-jyQ=/0x0/filters:format(jpeg)/pic5100691.jpg"
@@ -53,10 +58,5 @@
     "name": "P for Pizza",
     "href": "https://boardgamegeek.com/boardgame/311330",
     "imgSrc": "https://cf.geekdo-images.com/6KnxeefQyxQlAaaarWSSmw__original/img/op2otqCP9id0JogK96eFW_tzxBY=/0x0/filters:format(png)/pic5509028.png"
-  },
-  {
-    "name": "SCOUT",
-    "href": "https://boardgamegeek.com/boardgame/291453",
-    "imgSrc": "https://cf.geekdo-images.com/cf0xxkevbwTGF3VUZymKjg__original/img/vkElrRCPJxy7Q3TH9olpq20egA4=/0x0/filters:format(png)/pic6398727.png"
   }
 ]
