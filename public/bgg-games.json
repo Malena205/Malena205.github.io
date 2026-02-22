@@ -1,5 +1,20 @@
 [
   {
+    "name": "Jaipur",
+    "href": "https://boardgamegeek.com/boardgame/54043",
+    "imgSrc": "https://cf.geekdo-images.com/_LTujSe_o16nvjDC-J0seA__original/img/zUnAdsgt4dCxvtoRDc_9DHbic0M=/0x0/filters:format(jpeg)/pic5100947.jpg"
+  },
+  {
+    "name": "Wayfarers of the South Tigris",
+    "href": "https://boardgamegeek.com/boardgame/350316",
+    "imgSrc": "https://cf.geekdo-images.com/bH-ThnratBE1MAB_KdgrWg__original/img/FMbwKz_hXrfQEPVfYe8U2nIOwyQ=/0x0/filters:format(jpeg)/pic7339734.jpg"
+  },
+  {
+    "name": "Wingspan Asia",
+    "href": "https://boardgamegeek.com/boardgame/366161",
+    "imgSrc": "https://cf.geekdo-images.com/h1dRxq4lNMpuSUSGdgCmfA__original/img/MSX7waTxS81SiyxAmmCJFFWAl1I=/0x0/filters:format(jpeg)/pic7107431.jpg"
+  },
+  {
     "name": "SCOUT",
     "href": "https://boardgamegeek.com/boardgame/291453",
     "imgSrc": "https://cf.geekdo-images.com/cf0xxkevbwTGF3VUZymKjg__original/img/vkElrRCPJxy7Q3TH9olpq20egA4=/0x0/filters:format(png)/pic6398727.png"
@@ -43,20 +58,5 @@
     "name": "Welcome to the Moon",
     "href": "https://boardgamegeek.com/boardgame/339789",
     "imgSrc": "https://cf.geekdo-images.com/eCdiHCB9OobumwaGl4dbOQ__original/img/U4DY7_OUE1XI1m1Fi0iubbf2sEI=/0x0/filters:format(png)/pic6204967.png"
-  },
-  {
-    "name": "Long Shot: The Dice Game",
-    "href": "https://boardgamegeek.com/boardgame/295374",
-    "imgSrc": "https://cf.geekdo-images.com/j9RO81ihYw0_oPj6iqV_bA__original/img/-jPNsFg5d9uA7D4WGDIP3TNLHX4=/0x0/filters:format(jpeg)/pic6682376.jpg"
-  },
-  {
-    "name": "Aeon&#039;s End: War Eternal",
-    "href": "https://boardgamegeek.com/boardgame/218417",
-    "imgSrc": "https://cf.geekdo-images.com/H2st1bZH4O0FM46NhKMqyQ__original/img/wR0VHD6Svlp34wxKN6OHV4YZZgM=/0x0/filters:format(jpeg)/pic3430893.jpg"
-  },
-  {
-    "name": "P for Pizza",
-    "href": "https://boardgamegeek.com/boardgame/311330",
-    "imgSrc": "https://cf.geekdo-images.com/6KnxeefQyxQlAaaarWSSmw__original/img/op2otqCP9id0JogK96eFW_tzxBY=/0x0/filters:format(png)/pic5509028.png"
   }
 ]
