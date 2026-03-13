@@ -1,5 +1,15 @@
 [
   {
+    "name": "Beer &amp; Bread",
+    "href": "https://boardgamegeek.com/boardgame/369880",
+    "imgSrc": "https://cf.geekdo-images.com/vPRTRJce1GOsUf6M_dWd-g__original/img/IiugqYTDlz1Rk1EAaEwDxr65YgI=/0x0/filters:format(jpeg)/pic7064178.jpg"
+  },
+  {
+    "name": "Revive",
+    "href": "https://boardgamegeek.com/boardgame/332772",
+    "imgSrc": "https://cf.geekdo-images.com/V0OZ9QR0pC9G5t5i9MoZTQ__original/img/NxxAoxVxMNkDGEkD3aoobPL14dI=/0x0/filters:format(jpeg)/pic6950224.jpg"
+  },
+  {
     "name": "Sea Salt &amp; Paper",
     "href": "https://boardgamegeek.com/boardgame/367220",
     "imgSrc": "https://cf.geekdo-images.com/CIh_rXKoRw9z8K0PJxT8nQ__original/img/AX2wyHhWFgVh5OArXAjVHY-nFZg=/0x0/filters:format(jpeg)/pic6973911.jpg"
@@ -48,15 +58,5 @@
     "name": "Agricola",
     "href": "https://boardgamegeek.com/boardgame/31260",
     "imgSrc": "https://cf.geekdo-images.com/3L6ZtOll9W5O6-3-EwSMyw__original/img/V37KuMJlCzpxAilzN39BzeLvc9Q=/0x0/filters:format(jpeg)/pic1899157.jpg"
-  },
-  {
-    "name": "Trickerion: Legends of Illusion",
-    "href": "https://boardgamegeek.com/boardgame/163068",
-    "imgSrc": "https://cf.geekdo-images.com/9gob752VqEklQFV_gz16hw__original/img/ivQUea2qrHp2TDLM4i7gp1123vQ=/0x0/filters:format(png)/pic2585510.png"
-  },
-  {
-    "name": "Shallow Regrets",
-    "href": "https://boardgamegeek.com/boardgame/434870",
-    "imgSrc": "https://cf.geekdo-images.com/doymdy9lSftznRpufRMg_g__original/img/45aAXkRO9hrS8Wddf_YYCTLwNMQ=/0x0/filters:format(png)/pic8652897.png"
   }
 ]
