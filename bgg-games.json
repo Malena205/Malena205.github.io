@@ -1,5 +1,15 @@
 [
   {
+    "name": "The Crew: Mission Deep Sea",
+    "href": "https://boardgamegeek.com/boardgame/324856",
+    "imgSrc": "https://cf.geekdo-images.com/VuBqZ1sMaDAVVHF_OEJP4g__original/img/jGWxczXC_VWZofeAmlO_DkB0hCI=/0x0/filters:format(jpeg)/pic5988903.jpg"
+  },
+  {
+    "name": "Spicy",
+    "href": "https://boardgamegeek.com/boardgame/299169",
+    "imgSrc": "https://cf.geekdo-images.com/eLJJ7f5I106enEFkSfxmnQ__original/img/dH1wpQ36ZJDG-uur4JAAcoz8CY8=/0x0/filters:format(png)/pic5181748.png"
+  },
+  {
     "name": "Daybreak",
     "href": "https://boardgamegeek.com/boardgame/334986",
     "imgSrc": "https://cf.geekdo-images.com/YU8rm_FMnKHS2GPDFvLb6g__original/img/6umYavtw4Iw41gTtBZhNS7LrKIA=/0x0/filters:format(png)/pic7068528.png"
@@ -48,15 +58,5 @@
     "name": "Just One",
     "href": "https://boardgamegeek.com/boardgame/254640",
     "imgSrc": "https://cf.geekdo-images.com/74haNunMBn85beBi-yIKwA__original/img/hA22qL6nZxchA8FMTIfhLMcI53I=/0x0/filters:format(png)/pic8669313.png"
-  },
-  {
-    "name": "Take 5",
-    "href": "https://boardgamegeek.com/boardgame/432",
-    "imgSrc": "https://cf.geekdo-images.com/WuOY1XAIJQ-RGAmT_apW_w__original/img/06TSBC2s-cwbxfPmy_pf7n5p-jM=/0x0/filters:format(jpeg)/pic8632998.jpg"
-  },
-  {
-    "name": "Jackpot: Set the Reel",
-    "href": "https://boardgamegeek.com/boardgame/447589",
-    "imgSrc": "https://cf.geekdo-images.com/fsz3H7MCiMLJoaOQP1nf1A__original/img/BGkdIF2rgLN25k5tgDsRsEKlFD8=/0x0/filters:format(jpeg)/pic8922576.jpg"
   }
 ]
