@@ -1,5 +1,10 @@
 [
   {
+    "name": "Patchwork",
+    "href": "https://boardgamegeek.com/boardgame/163412",
+    "imgSrc": "https://cf.geekdo-images.com/xNSaIHCKr_cc7Q2rQSSJPQ__original/img/HJJdVosBV35kj8pQ6wmQMiJRhVA=/0x0/filters:format(jpeg)/pic9273518.jpg"
+  },
+  {
     "name": "Reforest",
     "href": "https://boardgamegeek.com/boardgame/387276",
     "imgSrc": "https://cf.geekdo-images.com/so4xa-rIyWBy0L_iKcOGyw__original/img/cxAQfJbmkeSbZA3ENXxT4qeops0=/0x0/filters:format(png)/pic8077548.png"
@@ -53,10 +58,5 @@
     "name": "Sea Salt &amp; Paper",
     "href": "https://boardgamegeek.com/boardgame/367220",
     "imgSrc": "https://cf.geekdo-images.com/CIh_rXKoRw9z8K0PJxT8nQ__original/img/AX2wyHhWFgVh5OArXAjVHY-nFZg=/0x0/filters:format(jpeg)/pic6973911.jpg"
-  },
-  {
-    "name": "Azul",
-    "href": "https://boardgamegeek.com/boardgame/230802",
-    "imgSrc": "https://cf.geekdo-images.com/aPSHJO0d0XOpQR5X-wJonw__original/img/AkbtYVc6xXJF3c9EUrakklcclKw=/0x0/filters:format(png)/pic6973671.png"
   }
 ]
