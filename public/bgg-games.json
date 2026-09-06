@@ -1,5 +1,10 @@
 [
   {
+    "name": "The Quest for El Dorado",
+    "href": "https://boardgamegeek.com/boardgame/217372",
+    "imgSrc": "https://cf.geekdo-images.com/b5VyYjNfAxJ4Z-Dx2UWlqg__original/img/-GqQ0EOfg9e3yFVpKgJbPdlunso=/0x0/filters:format(jpeg)/pic7945692.jpg"
+  },
+  {
     "name": "Bananagrams",
     "href": "https://boardgamegeek.com/boardgame/27225",
     "imgSrc": "https://cf.geekdo-images.com/1QjYPI4bXx4OUMJPlrsNBA__original/img/WA2NRNJx83xq81H2dnnwEDV2Ork=/0x0/filters:format(jpeg)/pic2463443.jpg"
@@ -53,10 +58,5 @@
     "name": "Just One",
     "href": "https://boardgamegeek.com/boardgame/254640",
     "imgSrc": "https://cf.geekdo-images.com/74haNunMBn85beBi-yIKwA__original/img/hA22qL6nZxchA8FMTIfhLMcI53I=/0x0/filters:format(png)/pic8669313.png"
-  },
-  {
-    "name": "Nokosu Dice",
-    "href": "https://boardgamegeek.com/boardgame/294693",
-    "imgSrc": "https://cf.geekdo-images.com/lbtoLuxIdsY82pJydTZVBQ__original/img/172KzAcd9ogmu9qjj_n0qeUrgUo=/0x0/filters:format(jpeg)/pic5069035.jpg"
   }
 ]
