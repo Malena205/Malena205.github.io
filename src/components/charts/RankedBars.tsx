@@ -43,7 +43,7 @@ const RankedBars = ({ rows, labelWidth = '9.5rem' }: { rows: RankedBar[]; labelW
             )}
             <span className="flex items-center">
               <span
-                className="block h-3 rounded-r bg-[#2a78d6] transition-colors group-hover:bg-[#1c5cab]"
+                className="block h-3 rounded-r bg-[var(--chart-bar)] transition-colors group-hover:bg-[var(--chart-bar-hover)]"
                 style={{ width: `calc((100% - 2.25rem) * ${row.value / max})`, minWidth: row.value > 0 ? 2 : 0 }}
               />
               <span className="ml-2 tabular-nums text-gray-600">{row.value}</span>

@@ -26,13 +26,13 @@ const LEFT = 30;
 const TOP = 18;
 const HEIGHT = TOP + 7 * STEP;
 
-// One blue hue, light to dark; validated as an ordinal ramp against white.
+// One hue, light to dark; the colours come from the chart theme in globals.css.
 const EMPTY = '#efefec';
 export const HEATMAP_LEVELS = [
-  { min: 1, label: '1', color: '#86b6ef' },
-  { min: 2, label: '2–3', color: '#3987e5' },
-  { min: 4, label: '4–6', color: '#1c5cab' },
-  { min: 7, label: '7+', color: '#0d366b' },
+  { min: 1, label: '1', color: 'var(--chart-1)' },
+  { min: 2, label: '2–3', color: 'var(--chart-2)' },
+  { min: 4, label: '4–6', color: 'var(--chart-3)' },
+  { min: 7, label: '7+', color: 'var(--chart-4)' },
 ];
 
 const colorFor = (total: number) => {
@@ -103,7 +103,7 @@ const CalendarHeatmap = ({ days, from, to, period, scrollToEnd, centered }: Prop
           width={CELL}
           height={CELL}
           rx={2.5}
-          fill={colorFor(days.get(date)?.total ?? 0)}
+          style={{ fill: colorFor(days.get(date)?.total ?? 0) }}
         />,
       );
     }

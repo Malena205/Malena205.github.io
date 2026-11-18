@@ -1,3 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Chart colour themes: four steps of one hue, light to dark, each checked for
+   contrast against the white page. --chart-bar colours the bar charts.
+   :root holds the theme the site uses; the others are alternatives. */
+:root,
+[data-chart-theme='blue'] {
+  --chart-1: #86b6ef;
+  --chart-2: #3987e5;
+  --chart-3: #1c5cab;
+  --chart-4: #0d366b;
+  --chart-bar: #2a78d6;
+  --chart-bar-hover: #1c5cab;
+}
+
+[data-chart-theme='teal'] {
+  --chart-1: #52bfb9;
+  --chart-2: #099791;
+  --chart-3: #056965;
+  --chart-4: #023e3c;
+  --chart-bar: #099791;
+  --chart-bar-hover: #056965;
+}
+
+[data-chart-theme='green'] {
+  --chart-1: #7cbd89;
+  --chart-2: #2a9b4f;
+  --chart-3: #006e30;
+  --chart-4: #004219;
+  --chart-bar: #2a9b4f;
+  --chart-bar-hover: #006e30;
+}
+
+[data-chart-theme='violet'] {
+  --chart-1: #af9ee4;
+  --chart-2: #8b6dd2;
+  --chart-3: #61489b;
+  --chart-4: #3a2862;
+  --chart-bar: #8b6dd2;
+  --chart-bar-hover: #61489b;
+}
+
+[data-chart-theme='orange'] {
+  --chart-1: #de9871;
+  --chart-2: #c8631b;
+  --chart-3: #8f4100;
+  --chart-4: #582400;
+  --chart-bar: #c8631b;
+  --chart-bar-hover: #8f4100;
+}
+
+[data-chart-theme='pink'] {
+  --chart-1: #df90a8;
+  --chart-2: #c8577f;
+  --chart-3: #923558;
+  --chart-4: #5b1933;
+  --chart-bar: #c8577f;
+  --chart-bar-hover: #923558;
+}

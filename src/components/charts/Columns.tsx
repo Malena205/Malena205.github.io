@@ -91,7 +91,7 @@ const Columns = ({ data, unit, periodName, caption }: Props) => {
                   )}
                   <span
                     className={`block w-full max-w-[24px] rounded-t transition-colors group-focus-visible:ring-2 group-focus-visible:ring-gray-900 ${
-                      active === index ? 'bg-[#1c5cab]' : 'bg-[#2a78d6]'
+                      active === index ? 'bg-[var(--chart-bar-hover)]' : 'bg-[var(--chart-bar)]'
                     }`}
                     style={{ height: entry.value === 0 ? 0 : Math.max(2, PLOT_HEIGHT * (entry.value / top)) }}
                   />
