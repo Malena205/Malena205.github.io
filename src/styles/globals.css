@@ -15,47 +15,74 @@
   --chart-bar-hover: #1c5cab;
 }
 
-[data-chart-theme='teal'] {
-  --chart-1: #52bfb9;
-  --chart-2: #099791;
-  --chart-3: #056965;
-  --chart-4: #023e3c;
-  --chart-bar: #099791;
-  --chart-bar-hover: #056965;
+[data-chart-theme='ink'] {
+  --chart-1: #a8abaf;
+  --chart-2: #80838a;
+  --chart-3: #585b60;
+  --chart-4: #313337;
+  --chart-bar: #80838a;
+  --chart-bar-hover: #585b60;
 }
 
-[data-chart-theme='green'] {
-  --chart-1: #7cbd89;
-  --chart-2: #2a9b4f;
-  --chart-3: #006e30;
-  --chart-4: #004219;
-  --chart-bar: #2a9b4f;
-  --chart-bar-hover: #006e30;
+[data-chart-theme='slate'] {
+  --chart-1: #96aec3;
+  --chart-2: #6687a4;
+  --chart-3: #415e77;
+  --chart-4: #213546;
+  --chart-bar: #6687a4;
+  --chart-bar-hover: #415e77;
 }
 
-[data-chart-theme='violet'] {
-  --chart-1: #af9ee4;
-  --chart-2: #8b6dd2;
-  --chart-3: #61489b;
-  --chart-4: #3a2862;
-  --chart-bar: #8b6dd2;
-  --chart-bar-hover: #61489b;
+[data-chart-theme='petrol'] {
+  --chart-1: #7cb5c4;
+  --chart-2: #3391a5;
+  --chart-3: #046677;
+  --chart-4: #003a45;
+  --chart-bar: #3391a5;
+  --chart-bar-hover: #046677;
 }
 
-[data-chart-theme='orange'] {
-  --chart-1: #de9871;
-  --chart-2: #c8631b;
-  --chart-3: #8f4100;
-  --chart-4: #582400;
-  --chart-bar: #c8631b;
-  --chart-bar-hover: #8f4100;
+[data-chart-theme='indigo'] {
+  --chart-1: #9ca7dc;
+  --chart-2: #707dc5;
+  --chart-3: #4b5593;
+  --chart-4: #282e59;
+  --chart-bar: #707dc5;
+  --chart-bar-hover: #4b5593;
 }
 
-[data-chart-theme='pink'] {
-  --chart-1: #df90a8;
-  --chart-2: #c8577f;
-  --chart-3: #923558;
-  --chart-4: #5b1933;
-  --chart-bar: #c8577f;
-  --chart-bar-hover: #923558;
+[data-chart-theme='forest'] {
+  --chart-1: #90b59c;
+  --chart-2: #5c916f;
+  --chart-3: #376749;
+  --chart-4: #193b26;
+  --chart-bar: #5c916f;
+  --chart-bar-hover: #376749;
+}
+
+[data-chart-theme='plum'] {
+  --chart-1: #cb9ab5;
+  --chart-2: #ad6b91;
+  --chart-3: #7e4566;
+  --chart-4: #4a233b;
+  --chart-bar: #ad6b91;
+  --chart-bar-hover: #7e4566;
+}
+
+[data-chart-theme='terracotta'] {
+  --chart-1: #d49c8a;
+  --chart-2: #b86c54;
+  --chart-3: #884531;
+  --chart-4: #512416;
+  --chart-bar: #b86c54;
+  --chart-bar-hover: #884531;
+}
+
+[data-chart-theme='ochre'] {
+  --chart-1: #c4a673;
+  --chart-2: #a67b28;
+  --chart-3: #775300;
+  --chart-4: #442e00;
+  --chart-bar: #a67b28;
+  --chart-bar-hover: #775300;
 }
