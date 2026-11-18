@@ -6,42 +6,6 @@
    contrast against the white page. --chart-bar colours the bar charts.
    :root holds the theme the site uses; the others are alternatives. */
 :root,
-[data-chart-theme='blue'] {
-  --chart-1: #86b6ef;
-  --chart-2: #3987e5;
-  --chart-3: #1c5cab;
-  --chart-4: #0d366b;
-  --chart-bar: #2a78d6;
-  --chart-bar-hover: #1c5cab;
-}
-
-[data-chart-theme='ink'] {
-  --chart-1: #a8abaf;
-  --chart-2: #80838a;
-  --chart-3: #585b60;
-  --chart-4: #313337;
-  --chart-bar: #80838a;
-  --chart-bar-hover: #585b60;
-}
-
-[data-chart-theme='slate'] {
-  --chart-1: #96aec3;
-  --chart-2: #6687a4;
-  --chart-3: #415e77;
-  --chart-4: #213546;
-  --chart-bar: #6687a4;
-  --chart-bar-hover: #415e77;
-}
-
-[data-chart-theme='petrol'] {
-  --chart-1: #7cb5c4;
-  --chart-2: #3391a5;
-  --chart-3: #046677;
-  --chart-4: #003a45;
-  --chart-bar: #3391a5;
-  --chart-bar-hover: #046677;
-}
-
 [data-chart-theme='indigo'] {
   --chart-1: #9ca7dc;
   --chart-2: #707dc5;
@@ -51,38 +15,65 @@
   --chart-bar-hover: #4b5593;
 }
 
-[data-chart-theme='forest'] {
-  --chart-1: #90b59c;
-  --chart-2: #5c916f;
-  --chart-3: #376749;
-  --chart-4: #193b26;
-  --chart-bar: #5c916f;
-  --chart-bar-hover: #376749;
+[data-chart-theme='iris'] {
+  --chart-1: #9ca4ee;
+  --chart-2: #7175de;
+  --chart-3: #4c4da9;
+  --chart-4: #292868;
+  --chart-bar: #7175de;
+  --chart-bar-hover: #4c4da9;
 }
 
-[data-chart-theme='plum'] {
-  --chart-1: #cb9ab5;
-  --chart-2: #ad6b91;
-  --chart-3: #7e4566;
-  --chart-4: #4a233b;
-  --chart-bar: #ad6b91;
-  --chart-bar-hover: #7e4566;
+[data-chart-theme='periwinkle'] {
+  --chart-1: #97aad9;
+  --chart-2: #6880c2;
+  --chart-3: #445891;
+  --chart-4: #233057;
+  --chart-bar: #6880c2;
+  --chart-bar-hover: #445891;
 }
 
-[data-chart-theme='terracotta'] {
-  --chart-1: #d49c8a;
-  --chart-2: #b86c54;
-  --chart-3: #884531;
-  --chart-4: #512416;
-  --chart-bar: #b86c54;
-  --chart-bar-hover: #884531;
+[data-chart-theme='cornflower'] {
+  --chart-1: #87ade4;
+  --chart-2: #4f83d0;
+  --chart-3: #2c5a9d;
+  --chart-4: #123260;
+  --chart-bar: #4f83d0;
+  --chart-bar-hover: #2c5a9d;
 }
 
-[data-chart-theme='ochre'] {
-  --chart-1: #c4a673;
-  --chart-2: #a67b28;
-  --chart-3: #775300;
-  --chart-4: #442e00;
-  --chart-bar: #a67b28;
-  --chart-bar-hover: #775300;
+[data-chart-theme='denim'] {
+  --chart-1: #8faecf;
+  --chart-2: #5b87b4;
+  --chart-3: #375e85;
+  --chart-4: #1a354f;
+  --chart-bar: #5b87b4;
+  --chart-bar-hover: #375e85;
+}
+
+[data-chart-theme='dusk'] {
+  --chart-1: #a7a7c7;
+  --chart-2: #7f7ea9;
+  --chart-3: #57567b;
+  --chart-4: #303049;
+  --chart-bar: #7f7ea9;
+  --chart-bar-hover: #57567b;
+}
+
+[data-chart-theme='lavender'] {
+  --chart-1: #aea2d4;
+  --chart-2: #8976ba;
+  --chart-3: #604e8a;
+  --chart-4: #362a53;
+  --chart-bar: #8976ba;
+  --chart-bar-hover: #604e8a;
+}
+
+[data-chart-theme='amethyst'] {
+  --chart-1: #ba9ecc;
+  --chart-2: #9870b0;
+  --chart-3: #6d4a82;
+  --chart-4: #3f274d;
+  --chart-bar: #9870b0;
+  --chart-bar-hover: #6d4a82;
 }
