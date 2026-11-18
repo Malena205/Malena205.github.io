@@ -58,15 +58,15 @@ const BoardGameStats = () => {
   const since = range === 'year' ? 'in the past year' : `since ${formatMonthYear(firstPlayDate)}`;
   const tiles = [
     { label: 'Plays', value: summary.totalPlays, note: since },
+    ...(summary.busiestDay
+      ? [{ label: 'Busiest day', value: summary.busiestDay.total, note: formatShortDay(summary.busiestDay.date) }]
+      : []),
     { label: 'Different games', value: summary.totalGames, note: since },
     {
       label: 'H-index',
       value: summary.hIndex,
       note: `${plural(summary.hIndex, 'game', 'games')} played ${summary.hIndex}+ times`,
     },
-    ...(summary.busiestDay
-      ? [{ label: 'Busiest day', value: summary.busiestDay.total, note: formatShortDay(summary.busiestDay.date) }]
-      : []),
   ];
 
   // The past year usually starts mid-month; leave that partial month out of the monthly chart.
