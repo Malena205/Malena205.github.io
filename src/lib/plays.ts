@@ -28,6 +28,8 @@ export interface PlaySummary {
   totalGames: number;
   daysPlayed: number;
   busiestDay: { date: string; total: number } | null;
+  /** The largest H such that H different games were each played at least H times. */
+  hIndex: number;
   /** Ranked by number of plays. */
   mostPlayed: GameStats[];
   /** One entry per calendar month in the range, including months without plays. */
@@ -112,12 +114,14 @@ export function summarizePlays(from: string, to: string): PlaySummary {
   });
 
   const games = aggregateGames(selected);
+  const mostPlayed = Array.from(games.values()).sort(byRank);
   return {
     totalPlays,
     totalGames: games.size,
     daysPlayed: dayTotals.size,
     busiestDay,
-    mostPlayed: Array.from(games.values()).sort(byRank),
+    hIndex: mostPlayed.filter((game, index) => game.plays >= index + 1).length,
+    mostPlayed,
     byMonth:
       from && to && from <= to
         ? monthRange(from.slice(0, 7), to.slice(0, 7)).map((month) => ({ month, value: monthTotals.get(month) ?? 0 }))

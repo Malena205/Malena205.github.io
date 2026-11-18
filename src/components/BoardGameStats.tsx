@@ -35,6 +35,11 @@ const BoardGameStats = () => {
     { label: 'Plays', value: summary.totalPlays, note: since },
     { label: 'Different games', value: summary.totalGames, note: since },
     { label: 'Days played', value: summary.daysPlayed, note: since },
+    {
+      label: 'H-index',
+      value: summary.hIndex,
+      note: `${plural(summary.hIndex, 'game', 'games')} played ${summary.hIndex}+ times`,
+    },
     ...(summary.busiestDay
       ? [{ label: 'Busiest day', value: summary.busiestDay.total, note: formatShortDay(summary.busiestDay.date) }]
       : []),
@@ -91,7 +96,7 @@ const BoardGameStats = () => {
         ))}
       </div>
 
-      <dl className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-3 md:grid-cols-5">
         {tiles.map((tile) => (
           <div key={tile.label}>
             <dt className="text-sm text-gray-500">{tile.label}</dt>
