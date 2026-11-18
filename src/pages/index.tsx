@@ -2,7 +2,6 @@ import BoardGameGeekWidget from '../components/BoardGameGeekWidget';
 import BoardGameStats from '../components/BoardGameStats';
 import BookStats from '../components/BookStats';
 import BooksWidget from '../components/BooksWidget';
-import ChartThemePreview from '../components/ChartThemePreview';
 
 export default function Home() {
   return (
@@ -39,7 +38,6 @@ export default function Home() {
 
       <BoardGameStats />
       <BookStats />
-      <ChartThemePreview />
     </main>
   );
 }

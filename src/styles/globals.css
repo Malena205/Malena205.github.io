@@ -2,78 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Chart colour themes: four steps of one hue, light to dark, each checked for
-   contrast against the white page. --chart-bar colours the bar charts.
-   :root holds the theme the site uses; the others are alternatives. */
-:root,
-[data-chart-theme='indigo'] {
-  --chart-1: #9ca7dc;
-  --chart-2: #707dc5;
-  --chart-3: #4b5593;
-  --chart-4: #282e59;
-  --chart-bar: #707dc5;
-  --chart-bar-hover: #4b5593;
-}
-
-[data-chart-theme='iris'] {
-  --chart-1: #9ca4ee;
-  --chart-2: #7175de;
-  --chart-3: #4c4da9;
-  --chart-4: #292868;
-  --chart-bar: #7175de;
-  --chart-bar-hover: #4c4da9;
-}
-
-[data-chart-theme='periwinkle'] {
-  --chart-1: #97aad9;
-  --chart-2: #6880c2;
-  --chart-3: #445891;
-  --chart-4: #233057;
-  --chart-bar: #6880c2;
-  --chart-bar-hover: #445891;
-}
-
-[data-chart-theme='cornflower'] {
-  --chart-1: #87ade4;
-  --chart-2: #4f83d0;
-  --chart-3: #2c5a9d;
-  --chart-4: #123260;
-  --chart-bar: #4f83d0;
-  --chart-bar-hover: #2c5a9d;
-}
-
-[data-chart-theme='denim'] {
-  --chart-1: #8faecf;
-  --chart-2: #5b87b4;
-  --chart-3: #375e85;
-  --chart-4: #1a354f;
-  --chart-bar: #5b87b4;
-  --chart-bar-hover: #375e85;
-}
-
-[data-chart-theme='dusk'] {
-  --chart-1: #a7a7c7;
-  --chart-2: #7f7ea9;
-  --chart-3: #57567b;
-  --chart-4: #303049;
-  --chart-bar: #7f7ea9;
-  --chart-bar-hover: #57567b;
-}
-
-[data-chart-theme='lavender'] {
+/* Chart colours: four steps of one lavender hue, light to dark, checked for
+   contrast against the white page. The calendar uses the steps directly; the
+   bar charts blend between the lightest and darkest by value. */
+:root {
   --chart-1: #aea2d4;
   --chart-2: #8976ba;
   --chart-3: #604e8a;
   --chart-4: #362a53;
-  --chart-bar: #8976ba;
-  --chart-bar-hover: #604e8a;
-}
-
-[data-chart-theme='amethyst'] {
-  --chart-1: #ba9ecc;
-  --chart-2: #9870b0;
-  --chart-3: #6d4a82;
-  --chart-4: #3f274d;
-  --chart-bar: #9870b0;
-  --chart-bar-hover: #6d4a82;
 }

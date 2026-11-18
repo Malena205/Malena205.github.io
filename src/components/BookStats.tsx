@@ -47,7 +47,7 @@ const BookStats = () => {
         <div>
           <h3 className="text-lg">Most-read authors</h3>
           <p className="mb-3 text-sm text-gray-500">Among my last {authorSampleSize} books</p>
-          <RankedBars rows={authors} />
+          <RankedBars rows={authors} shaded />
         </div>
       </div>
 

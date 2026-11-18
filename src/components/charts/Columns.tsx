@@ -31,7 +31,7 @@ function niceScale(max: number) {
   return { top, ticks };
 }
 
-/** Columns over time: one hue, the peak labelled, every value in the tooltip and table. */
+/** Columns over time: one colour, the peak labelled, every value in the tooltip and table. */
 const Columns = ({ data, unit, periodName, caption }: Props) => {
   const { containerRef, tip, show, hide } = useTooltip<number>();
   const [active, setActive] = useState<number | null>(null);
@@ -90,10 +90,13 @@ const Columns = ({ data, unit, periodName, caption }: Props) => {
                     </span>
                   )}
                   <span
-                    className={`block w-full max-w-[24px] rounded-t transition-colors group-focus-visible:ring-2 group-focus-visible:ring-gray-900 ${
-                      active === index ? 'bg-[var(--chart-bar-hover)]' : 'bg-[var(--chart-bar)]'
+                    className={`block w-full max-w-[24px] rounded-t transition group-focus-visible:ring-2 group-focus-visible:ring-gray-900 ${
+                      active === index ? 'brightness-90' : ''
                     }`}
-                    style={{ height: entry.value === 0 ? 0 : Math.max(2, PLOT_HEIGHT * (entry.value / top)) }}
+                    style={{
+                      height: entry.value === 0 ? 0 : Math.max(2, PLOT_HEIGHT * (entry.value / top)),
+                      backgroundColor: 'var(--chart-2)',
+                    }}
                   />
                 </button>
               ))}

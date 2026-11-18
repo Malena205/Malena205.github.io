@@ -1,4 +1,5 @@
 import React from 'react';
+import { shade } from './shade';
 import { TipValue, Tooltip, useTooltip } from './Tooltip';
 
 export interface RankedBar {
@@ -12,8 +13,15 @@ export interface RankedBar {
   tipDetail?: string[];
 }
 
-/** Ranked horizontal bars: one hue, value printed at the tip of each bar. */
-const RankedBars = ({ rows, labelWidth = '9.5rem' }: { rows: RankedBar[]; labelWidth?: string }) => {
+interface Props {
+  rows: RankedBar[];
+  labelWidth?: string;
+  /** Darken longer bars; otherwise every bar is the same colour. */
+  shaded?: boolean;
+}
+
+/** Ranked horizontal bars in one hue, the value printed at the tip of each bar. */
+const RankedBars = ({ rows, labelWidth = '9.5rem', shaded = false }: Props) => {
   const { containerRef, tip, show, hide } = useTooltip<RankedBar>();
   const max = Math.max(1, ...rows.map((row) => row.value));
 
@@ -43,8 +51,12 @@ const RankedBars = ({ rows, labelWidth = '9.5rem' }: { rows: RankedBar[]; labelW
             )}
             <span className="flex items-center">
               <span
-                className="block h-3 rounded-r bg-[var(--chart-bar)] transition-colors group-hover:bg-[var(--chart-bar-hover)]"
-                style={{ width: `calc((100% - 2.25rem) * ${row.value / max})`, minWidth: row.value > 0 ? 2 : 0 }}
+                className="block h-3 rounded-r transition group-hover:brightness-90"
+                style={{
+                  width: `calc((100% - 2.25rem) * ${row.value / max})`,
+                  minWidth: row.value > 0 ? 2 : 0,
+                  backgroundColor: shaded ? shade(row.value, max) : 'var(--chart-2)',
+                }}
               />
               <span className="ml-2 tabular-nums text-gray-600">{row.value}</span>
             </span>

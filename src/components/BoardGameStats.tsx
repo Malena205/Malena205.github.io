@@ -117,7 +117,7 @@ const BoardGameStats = () => {
         </div>
         <div>
           <h3 className="text-lg mb-3">Most played</h3>
-          <RankedBars rows={topGames} />
+          <RankedBars rows={topGames} shaded />
         </div>
       </div>
     </section>

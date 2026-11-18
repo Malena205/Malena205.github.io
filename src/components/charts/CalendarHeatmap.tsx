@@ -26,7 +26,7 @@ const LEFT = 30;
 const TOP = 18;
 const HEIGHT = TOP + 7 * STEP;
 
-// One hue, light to dark; the colours come from the chart theme in globals.css.
+// One hue, light to dark; the colours are defined in globals.css.
 const EMPTY = '#efefec';
 export const HEATMAP_LEVELS = [
   { min: 1, label: '1', color: 'var(--chart-1)' },
