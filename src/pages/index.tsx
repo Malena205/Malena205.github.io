@@ -2,14 +2,6 @@ import BoardGameGeekWidget from '../components/BoardGameGeekWidget';
 import BoardGameStats from '../components/BoardGameStats';
 import BookStats from '../components/BookStats';
 import BooksWidget from '../components/BooksWidget';
-import { recentFavourites } from '../lib/plays';
-
-// Falls back to a fixed sentence if there is too little recent play data.
-function favouritesSentence() {
-  const names = recentFavourites(3).map((game) => game.name);
-  if (names.length < 3) return 'My favourite board games at the moment are Spirit Island, Star Realms and Res Arcana.';
-  return `Lately I\u2019ve mostly been playing ${names[0]}, ${names[1]} and ${names[2]}.`;
-}
 
 export default function Home() {
   return (
@@ -22,7 +14,7 @@ export default function Home() {
         />
         <div className='space-y-4'>
           <h1 className="text-4xl lg:text-5xl font-bold">Malena Schmidt</h1>
-          <p className="text-lg md:text-xl">Hi, I&apos;m Malena. I work as a Quantitative Analyst at G-Research in London. In my free time I enjoy reading fantasy and science fiction books and playing board games. {favouritesSentence()}</p>
+          <p className="text-lg md:text-xl">Hi, I&apos;m Malena. I work as a Quantitative Analyst at G-Research in London. In my free time I enjoy reading fantasy and science fiction books and playing board games. My favourite board games at the moment are Spirit Island, Star Realms and Res Arcana.</p>
           <p className="text-lg md:text-xl">
             <a href="https://www.linkedin.com/in/judith-malena-schmidt/" target="_blank" className="underline">LinkedIn</a>
             {" · "}

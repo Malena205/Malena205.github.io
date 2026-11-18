@@ -1,6 +1,6 @@
 import playsData from '../../public/bgg-plays.json';
 import recentGamesData from '../../public/bgg-games.json';
-import { addDays, monthRange } from './dates';
+import { monthRange } from './dates';
 
 export interface RecentGame {
   id?: string;
@@ -103,16 +103,4 @@ export const busiestDay = Array.from(playsByDay.entries()).reduce<{ date: string
 
 export function playsInYear(year: string) {
   return rows.reduce((sum, row) => (row[0].startsWith(year) ? sum + row[2] : sum), 0);
-}
-
-/**
- * The most played games in the `days` leading up to the latest logged play.
- * Anchored on the data rather than on today's date so the statically built
- * page and the browser always agree.
- */
-export function recentFavourites(count: number, days = 90) {
-  if (!latestPlayDate) return [];
-  const since = addDays(latestPlayDate, -days);
-  const recent = aggregateGames(rows.filter((row) => row[0] > since));
-  return Array.from(recent.values()).sort(byRank).slice(0, count);
 }
