@@ -2,14 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-#gr_grid_widget_1725799722 > h2, #gr_grid_widget_1725799722 .gr_grid_branding {
-    @apply hidden;
-}
-
-#gr_grid_widget_1725799722 .gr_grid_container {
-    @apply grid grid-cols-3 lg:grid-cols-4 gap-2;
-}
-
-#gr_grid_widget_1725799722 .gr_grid_container .gr_grid_book_container img {
-    @apply rounded overflow-hidden w-full h-full object-cover transition hover:scale-105 shadow-md shadow-gray-400;
+/* Chart colours: four steps of one lavender hue, light to dark, checked for
+   contrast against the white page. The calendar uses the steps directly; the
+   bar charts blend between the lightest and darkest by value. */
+:root {
+  --chart-1: #aea2d4;
+  --chart-2: #8976ba;
+  --chart-3: #604e8a;
+  --chart-4: #362a53;
 }

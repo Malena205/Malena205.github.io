@@ -1,4 +1,4 @@
-name: Update BGG Data
+name: Update games and books data
 
 on:
   schedule:
@@ -22,16 +22,22 @@ jobs:
         env:
           BGG_TOKEN: ${{ secrets.BGG_TOKEN }}
 
+      - name: Fetch Goodreads data
+        # Goodreads has no API, so this reads the public widgets; if they are
+        # unavailable the existing books.json is kept and the run carries on.
+        continue-on-error: true
+        run: node scripts/fetch-goodreads.js
+
       - name: Commit and push changes
         id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/bgg-games.json
+          git add public/bgg-games.json public/bgg-plays.json public/books.json
           if git diff --staged --quiet; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
-            git commit -m "Update BGG games data"
+            git commit -m "Update games and books data"
             git push
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
