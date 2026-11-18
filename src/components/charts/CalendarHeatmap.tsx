@@ -18,13 +18,15 @@ interface Props {
   scrollToEnd?: boolean;
   /** Centre the calendar; leave off when several are stacked so they line up. */
   centered?: boolean;
+  /** Distance in pixels from one square to the next; the square itself is 3px smaller. */
+  step?: number;
 }
 
-const CELL = 12;
-const STEP = 15;
-const LEFT = 30;
+/** Width of the weekday labels to the left of the grid. */
+export const HEATMAP_LEFT = 30;
+const LEFT = HEATMAP_LEFT;
 const TOP = 18;
-const HEIGHT = TOP + 7 * STEP;
+const GAP = 3;
 
 // One hue, light to dark; the colours are defined in globals.css.
 const EMPTY = '#efefec';
@@ -50,7 +52,10 @@ interface Hovered {
   row: number;
 }
 
-const CalendarHeatmap = ({ days, from, to, period, scrollToEnd, centered }: Props) => {
+const CalendarHeatmap = ({ days, from, to, period, scrollToEnd, centered, step = 15 }: Props) => {
+  const STEP = step;
+  const CELL = step - GAP;
+  const HEIGHT = TOP + 7 * STEP;
   const [hovered, setHovered] = useState<Hovered | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const { containerRef, tip, showAt, hide } = useTooltip<string>();
@@ -147,7 +152,7 @@ const CalendarHeatmap = ({ days, from, to, period, scrollToEnd, centered }: Prop
             </text>
           ))}
           {['Mon', 'Wed', 'Fri'].map((label, index) => (
-            <text key={label} x={0} y={TOP + index * 2 * STEP + 10} className="fill-gray-500 text-[11px]">
+            <text key={label} x={0} y={TOP + index * 2 * STEP + CELL - 2} className="fill-gray-500 text-[11px]">
               {label}
             </text>
           ))}

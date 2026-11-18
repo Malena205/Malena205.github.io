@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import CalendarHeatmap, { HEATMAP_LEVELS } from './charts/CalendarHeatmap';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import CalendarHeatmap, { HEATMAP_LEFT, HEATMAP_LEVELS } from './charts/CalendarHeatmap';
 import Columns, { monthColumns } from './charts/Columns';
 import RankedBars from './charts/RankedBars';
 import { addDays, formatMonthYear, formatShortDay, plural, todayISO, weekday } from '../lib/dates';
@@ -12,6 +12,8 @@ const RANGES: { value: Range; label: string }[] = [
   { value: 'all', label: 'All time' },
 ];
 
+const YEAR_WEEKS = 53;
+
 const BoardGameStats = () => {
   const [range, setRange] = useState<Range>('year');
   // The statically built page ends at the latest logged play; the browser then moves on to today.
@@ -22,8 +24,31 @@ const BoardGameStats = () => {
   }, []);
 
   // "Past year" is the 53 weeks the calendar shows, starting on a Monday.
-  const yearStart = addDays(today, -weekday(today) - 52 * 7);
+  const yearStart = addDays(today, -weekday(today) - (YEAR_WEEKS - 1) * 7);
   const pastYear = useMemo(() => summarizePlays(yearStart, today), [yearStart, today]);
+
+  // The calendar shows a full year where there is room, and otherwise as many
+  // recent weeks as fit the width, with slightly larger squares for touch.
+  const calendarRef = useRef<HTMLDivElement>(null);
+  const [calendar, setCalendar] = useState({ weeks: YEAR_WEEKS, step: 15 });
+  useEffect(() => {
+    const element = calendarRef.current;
+    if (!element) return;
+    const fit = () => {
+      const width = element.clientWidth;
+      const fitsYear = width >= HEATMAP_LEFT + YEAR_WEEKS * 15;
+      const step = fitsYear ? 15 : 16;
+      const weeks = fitsYear ? YEAR_WEEKS : Math.max(8, Math.floor((width - HEATMAP_LEFT) / step));
+      setCalendar((current) => (current.weeks === weeks && current.step === step ? current : { weeks, step }));
+    };
+    fit();
+    const observer = new ResizeObserver(fit);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+  const calendarStart = addDays(today, -weekday(today) - (calendar.weeks - 1) * 7);
+  const calendarPeriod = calendar.weeks === YEAR_WEEKS ? 'the past year' : `the past ${calendar.weeks} weeks`;
+  const shown = useMemo(() => summarizePlays(calendarStart, today), [calendarStart, today]);
   const allTime = useMemo(() => summarizePlays(firstPlayDate, today), [today]);
 
   if (!latestPlayDate) return null;
@@ -62,11 +87,20 @@ const BoardGameStats = () => {
       <h2 className="text-2xl mb-2">Play History</h2>
       <hr className="mb-4" />
 
-      <CalendarHeatmap days={playsByDay} from={yearStart} to={today} period="the past year" scrollToEnd centered />
+      <div ref={calendarRef}>
+        <CalendarHeatmap
+          days={playsByDay}
+          from={calendarStart}
+          to={today}
+          period={calendarPeriod}
+          step={calendar.step}
+          scrollToEnd
+          centered
+        />
+      </div>
       <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-sm text-gray-500">
         <span>
-          {plural(pastYear.totalPlays, 'play', 'plays')} on {plural(pastYear.daysPlayed, 'day', 'days')} in the past
-          year
+          {plural(shown.totalPlays, 'play', 'plays')} on {plural(shown.daysPlayed, 'day', 'days')} in {calendarPeriod}
         </span>
         <span className="flex items-center gap-3" aria-hidden="true">
           <span>Plays per day</span>
