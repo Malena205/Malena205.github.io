@@ -8,8 +8,7 @@ const BooksWidget = () => (
   <>
     <div className="grid grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-4">
       {books.slice(0, 12).map((book) => {
-        const details = [];
-        if (book.author) details.push(book.author);
+        const details = [book.title];
         if (book.rating) details.push(stars(book.rating));
         return (
           <Cover
