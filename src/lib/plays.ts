@@ -23,6 +23,17 @@ export interface DayPlays {
   games: { name: string; plays: number }[];
 }
 
+export interface PlaySummary {
+  totalPlays: number;
+  totalGames: number;
+  daysPlayed: number;
+  busiestDay: { date: string; total: number } | null;
+  /** Ranked by number of plays. */
+  mostPlayed: GameStats[];
+  /** One entry per calendar month in the range, including months without plays. */
+  byMonth: { month: string; value: number }[];
+}
+
 /** [date, game id, quantity], newest first */
 type PlayRow = [string, string, number];
 
@@ -58,15 +69,11 @@ function aggregateGames(selected: PlayRow[]) {
 const byRank = (a: GameStats, b: GameStats) =>
   b.plays - a.plays || b.lastPlayed.localeCompare(a.lastPlayed) || a.name.localeCompare(b.name);
 
+/** All-time stats per game id. */
 export const statsByGame = aggregateGames(rows);
-
-export const mostPlayed = Array.from(statsByGame.values()).sort(byRank);
 
 export const latestPlayDate = rows.reduce((latest, row) => (row[0] > latest ? row[0] : latest), '');
 export const firstPlayDate = rows.reduce((first, row) => (row[0] < first ? row[0] : first), latestPlayDate);
-
-export const totalPlays = rows.reduce((sum, row) => sum + row[2], 0);
-export const totalGames = statsByGame.size;
 
 export const playsByDay = (() => {
   const days = new Map<string, DayPlays>();
@@ -83,24 +90,37 @@ export const playsByDay = (() => {
   return days;
 })();
 
-export const playsByMonth = (() => {
-  if (!latestPlayDate) return [];
-  const totals = new Map<string, number>();
-  for (const [date, , quantity] of rows) {
+/** Everything the stats section shows for the plays between `from` and `to`, inclusive. */
+export function summarizePlays(from: string, to: string): PlaySummary {
+  const selected = rows.filter((row) => row[0] >= from && row[0] <= to);
+
+  const dayTotals = new Map<string, number>();
+  const monthTotals = new Map<string, number>();
+  let totalPlays = 0;
+  for (const [date, , quantity] of selected) {
+    totalPlays += quantity;
+    dayTotals.set(date, (dayTotals.get(date) ?? 0) + quantity);
     const month = date.slice(0, 7);
-    totals.set(month, (totals.get(month) ?? 0) + quantity);
+    monthTotals.set(month, (monthTotals.get(month) ?? 0) + quantity);
   }
-  return monthRange(firstPlayDate.slice(0, 7), latestPlayDate.slice(0, 7)).map((month) => ({
-    month,
-    value: totals.get(month) ?? 0,
-  }));
-})();
 
-export const busiestDay = Array.from(playsByDay.entries()).reduce<{ date: string; total: number } | null>(
-  (best, [date, day]) => (!best || day.total > best.total ? { date, total: day.total } : best),
-  null,
-);
+  let busiestDay: PlaySummary['busiestDay'] = null;
+  dayTotals.forEach((total, date) => {
+    if (!busiestDay || total > busiestDay.total || (total === busiestDay.total && date > busiestDay.date)) {
+      busiestDay = { date, total };
+    }
+  });
 
-export function playsInYear(year: string) {
-  return rows.reduce((sum, row) => (row[0].startsWith(year) ? sum + row[2] : sum), 0);
+  const games = aggregateGames(selected);
+  return {
+    totalPlays,
+    totalGames: games.size,
+    daysPlayed: dayTotals.size,
+    busiestDay,
+    mostPlayed: Array.from(games.values()).sort(byRank),
+    byMonth:
+      from && to && from <= to
+        ? monthRange(from.slice(0, 7), to.slice(0, 7)).map((month) => ({ month, value: monthTotals.get(month) ?? 0 }))
+        : [],
+  };
 }

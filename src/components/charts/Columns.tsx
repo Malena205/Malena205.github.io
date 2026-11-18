@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
-import { formatMonthYear, plural } from '../../lib/dates';
+import { plural } from '../../lib/dates';
 import { TipValue, Tooltip, useTooltip } from './Tooltip';
 
+export interface Column {
+  key: string;
+  /** Full name of the period, e.g. "Dec 2025". */
+  label: string;
+  value: number;
+  /** Text under the column on the axis; most columns leave this empty. */
+  tick?: string;
+}
+
 interface Props {
-  data: { month: string; value: number }[];
+  data: Column[];
   /** [singular, plural], e.g. ['play', 'plays'] */
   unit: [string, string];
-  /** 'YYYY-MM' of a month that is still in progress, if any. */
-  currentMonth?: string;
+  /** Heading of the periods in the accessible table, e.g. "Month". */
+  periodName: string;
   caption: string;
 }
 
@@ -22,7 +31,8 @@ function niceScale(max: number) {
   return { top, ticks };
 }
 
-const MonthlyColumns = ({ data, unit, currentMonth, caption }: Props) => {
+/** Columns over time: one hue, the peak labelled, every value in the tooltip and table. */
+const Columns = ({ data, unit, periodName, caption }: Props) => {
   const { containerRef, tip, show, hide } = useTooltip<number>();
   const [active, setActive] = useState<number | null>(null);
 
@@ -62,16 +72,16 @@ const MonthlyColumns = ({ data, unit, currentMonth, caption }: Props) => {
             <div className="absolute inset-0 flex items-end">
               {data.map((entry, index) => (
                 <button
-                  key={entry.month}
+                  key={entry.key}
                   type="button"
-                  aria-label={`${formatMonthYear(entry.month)}: ${plural(entry.value, unit[0], unit[1])}`}
+                  aria-label={`${entry.label}: ${plural(entry.value, unit[0], unit[1])}`}
                   className="group relative flex h-full min-w-0 flex-1 cursor-default items-end justify-center px-px focus:outline-none"
                   onPointerMove={(event) => activate(event, index)}
                   onPointerDown={(event) => activate(event, index)}
                   onFocus={(event) => activate(event, index)}
                   onBlur={deactivate}
                 >
-                  {index === peak && active === null && (
+                  {index === peak && active === null && max > 0 && (
                     <span
                       className="absolute left-1/2 -translate-x-1/2 text-[11px] tabular-nums text-gray-600"
                       style={{ bottom: PLOT_HEIGHT * (entry.value / top) + 2 }}
@@ -89,25 +99,20 @@ const MonthlyColumns = ({ data, unit, currentMonth, caption }: Props) => {
               ))}
             </div>
           </div>
-          <div className="mt-1 flex text-[11px] text-gray-500">
-            {data.map((entry, index) => {
-              const isJanuary = entry.month.endsWith('-01');
-              const showYear = isJanuary || (index === 0 && !data.slice(1, 3).some((other) => other.month.endsWith('-01')));
-              return (
-                <div key={entry.month} className="relative h-4 min-w-0 flex-1">
-                  {showYear && <span className="absolute left-0 whitespace-nowrap">{entry.month.slice(0, 4)}</span>}
-                </div>
-              );
-            })}
+          <div className="mt-1 flex text-[11px] text-gray-500" aria-hidden="true">
+            {data.map((entry) => (
+              <div key={entry.key} className="relative h-4 min-w-0 flex-1">
+                {entry.tick && (
+                  <span className="absolute left-1/2 -translate-x-1/2 whitespace-nowrap">{entry.tick}</span>
+                )}
+              </div>
+            ))}
           </div>
           <Tooltip tip={tip}>
             {(index) => (
               <>
                 <TipValue>{plural(data[index].value, unit[0], unit[1])}</TipValue>
-                <div>
-                  {formatMonthYear(data[index].month)}
-                  {data[index].month === currentMonth ? ' (so far)' : ''}
-                </div>
+                <div>{data[index].label}</div>
               </>
             )}
           </Tooltip>
@@ -117,14 +122,14 @@ const MonthlyColumns = ({ data, unit, currentMonth, caption }: Props) => {
         <caption>{caption}</caption>
         <thead>
           <tr>
-            <th scope="col">Month</th>
+            <th scope="col">{periodName}</th>
             <th scope="col">{unit[1]}</th>
           </tr>
         </thead>
         <tbody>
           {data.map((entry) => (
-            <tr key={entry.month}>
-              <th scope="row">{formatMonthYear(entry.month)}</th>
+            <tr key={entry.key}>
+              <th scope="row">{entry.label}</th>
               <td>{entry.value}</td>
             </tr>
           ))}
@@ -134,4 +139,45 @@ const MonthlyColumns = ({ data, unit, currentMonth, caption }: Props) => {
   );
 };
 
-export default MonthlyColumns;
+/**
+ * Turns per-month totals into columns. Short ranges label every month; longer
+ * ones label each January with its year; very long ones are grouped by year.
+ */
+export function monthColumns(byMonth: { month: string; value: number }[], currentMonth?: string) {
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const name = (month: string) => `${MONTHS[Number(month.slice(5, 7)) - 1]} ${month.slice(0, 4)}`;
+  const currentYear = currentMonth?.slice(0, 4);
+
+  if (byMonth.length > 48) {
+    const years = new Map<string, number>();
+    for (const entry of byMonth) {
+      const year = entry.month.slice(0, 4);
+      years.set(year, (years.get(year) ?? 0) + entry.value);
+    }
+    const columns: Column[] = Array.from(years.entries()).map(([year, value]) => ({
+      key: year,
+      label: year === currentYear ? `${year} (so far)` : year,
+      value,
+      tick: years.size <= 12 ? year : `’${year.slice(2)}`,
+    }));
+    return { columns, periodName: 'Year', grouping: 'year' as const };
+  }
+
+  const everyMonth = byMonth.length <= 13;
+  const columns: Column[] = byMonth.map((entry, index) => {
+    const isJanuary = entry.month.endsWith('-01');
+    const nearJanuary = byMonth.slice(index + 1, index + 4).some((other) => other.month.endsWith('-01'));
+    let tick: string | undefined;
+    if (everyMonth) tick = MONTHS[Number(entry.month.slice(5, 7)) - 1];
+    else if (isJanuary || (index === 0 && !nearJanuary)) tick = entry.month.slice(0, 4);
+    return {
+      key: entry.month,
+      label: entry.month === currentMonth ? `${name(entry.month)} (so far)` : name(entry.month),
+      value: entry.value,
+      tick,
+    };
+  });
+  return { columns, periodName: 'Month', grouping: 'month' as const };
+}
+
+export default Columns;

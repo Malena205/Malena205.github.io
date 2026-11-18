@@ -1,32 +1,68 @@
-import React from 'react';
-import CalendarHeatmap from './charts/CalendarHeatmap';
-import MonthlyColumns from './charts/MonthlyColumns';
+import React, { useEffect, useMemo, useState } from 'react';
+import CalendarHeatmap, { HEATMAP_LEVELS } from './charts/CalendarHeatmap';
+import Columns, { monthColumns } from './charts/Columns';
 import RankedBars from './charts/RankedBars';
-import { formatMonthYear, formatShortDay, plural } from '../lib/dates';
-import {
-  busiestDay,
-  firstPlayDate,
-  latestPlayDate,
-  mostPlayed,
-  playsByDay,
-  playsByMonth,
-  playsInYear,
-  totalGames,
-  totalPlays,
-} from '../lib/plays';
+import { addDays, formatMonthYear, formatShortDay, plural, todayISO, weekday } from '../lib/dates';
+import { firstPlayDate, latestPlayDate, playsByDay, summarizePlays } from '../lib/plays';
+
+type Range = 'year' | 'all';
+
+const RANGES: { value: Range; label: string }[] = [
+  { value: 'year', label: 'Past year' },
+  { value: 'all', label: 'All time' },
+];
 
 const BoardGameStats = () => {
+  const [range, setRange] = useState<Range>('year');
+  // The statically built page ends at the latest logged play; the browser then moves on to today.
+  const [today, setToday] = useState(latestPlayDate);
+  useEffect(() => {
+    const now = todayISO();
+    if (now > latestPlayDate) setToday(now);
+  }, []);
+
+  // "Past year" is the 53 weeks the calendar shows, starting on a Monday.
+  const yearStart = addDays(today, -weekday(today) - 52 * 7);
+  const from = range === 'year' ? yearStart : firstPlayDate;
+  const summary = useMemo(() => summarizePlays(from, today), [from, today]);
+
   if (!latestPlayDate) return null;
 
-  const year = latestPlayDate.slice(0, 4);
+  const since = range === 'year' ? 'in the past year' : `since ${formatMonthYear(firstPlayDate)}`;
   const tiles = [
-    { label: 'Plays logged', value: totalPlays, note: `since ${formatMonthYear(firstPlayDate)}` },
-    { label: 'Different games', value: totalGames, note: 'played at least once' },
-    { label: `Plays in ${year}`, value: playsInYear(year), note: 'so far' },
-    ...(busiestDay ? [{ label: 'Busiest day', value: busiestDay.total, note: formatShortDay(busiestDay.date) }] : []),
+    { label: 'Plays', value: summary.totalPlays, note: since },
+    { label: 'Different games', value: summary.totalGames, note: since },
+    { label: 'Days played', value: summary.daysPlayed, note: since },
+    ...(summary.busiestDay
+      ? [{ label: 'Busiest day', value: summary.busiestDay.total, note: formatShortDay(summary.busiestDay.date) }]
+      : []),
   ];
 
-  const topGames = mostPlayed.slice(0, 10).map((game) => ({
+  const calendars =
+    range === 'year'
+      ? [{ key: 'year', heading: null, from: yearStart, to: today, period: 'the past year' }]
+      : (() => {
+          const years = [];
+          for (let year = Number(today.slice(0, 4)); year >= Number(firstPlayDate.slice(0, 4)); year--) {
+            const yearEnd = `${year}-12-31`;
+            const to = yearEnd < today ? yearEnd : today;
+            const plays = summarizePlays(`${year}-01-01`, to).totalPlays;
+            years.push({
+              key: String(year),
+              heading: `${year} · ${plural(plays, 'play', 'plays')}`,
+              from: `${year}-01-01`,
+              to,
+              period: String(year),
+            });
+          }
+          return years;
+        })();
+
+  // The past year usually starts mid-month; leave that partial month out of the monthly chart.
+  const months = range === 'year' && !yearStart.endsWith('-01') ? summary.byMonth.slice(1) : summary.byMonth;
+  const { columns, periodName, grouping } = monthColumns(months, today.slice(0, 7));
+
+  const topGames = summary.mostPlayed.slice(0, 10).map((game) => ({
     key: game.id,
     label: game.name,
     value: game.plays,
@@ -37,7 +73,24 @@ const BoardGameStats = () => {
 
   return (
     <section className="mt-12">
-      <h2 className="text-2xl mb-2">Play History</h2>
+      <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
+        <h2 className="text-2xl">Play History</h2>
+        <div role="group" aria-label="Time range" className="flex gap-1 text-sm">
+          {RANGES.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              aria-pressed={range === option.value}
+              onClick={() => setRange(option.value)}
+              className={`rounded-full px-3 py-0.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 ${
+                range === option.value ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </div>
       <hr className="mb-4" />
 
       <dl className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-4">
@@ -50,18 +103,39 @@ const BoardGameStats = () => {
         ))}
       </dl>
 
-      <div className="mt-8">
-        <CalendarHeatmap days={playsByDay} initialEnd={latestPlayDate} />
+      <div className="mt-8 space-y-4">
+        {calendars.map((calendar) => (
+          <div key={calendar.key}>
+            {calendar.heading && <h3 className="mb-1 text-sm text-gray-500">{calendar.heading}</h3>}
+            <CalendarHeatmap
+              days={playsByDay}
+              from={calendar.from}
+              to={calendar.to}
+              period={calendar.period}
+              scrollToEnd={calendar.to === today}
+              centered={range === 'year'}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="mt-2 flex flex-wrap items-center justify-end gap-3 text-sm text-gray-500" aria-hidden="true">
+        <span>Plays per day</span>
+        {HEATMAP_LEVELS.map((level) => (
+          <span key={level.label} className="flex items-center gap-1">
+            <span className="inline-block h-3 w-3 rounded-[3px]" style={{ backgroundColor: level.color }} />
+            {level.label}
+          </span>
+        ))}
       </div>
 
       <div className="grid sm:grid-cols-2 gap-12 mt-8">
         <div>
-          <h3 className="text-lg mb-3">Plays per month</h3>
-          <MonthlyColumns
-            data={playsByMonth}
+          <h3 className="text-lg mb-3">{grouping === 'year' ? 'Plays per year' : 'Plays per month'}</h3>
+          <Columns
+            data={columns}
             unit={['play', 'plays']}
-            currentMonth={latestPlayDate.slice(0, 7)}
-            caption="Board game plays per month"
+            periodName={periodName}
+            caption={`Board game plays per ${grouping} ${since}`}
           />
         </div>
         <div>

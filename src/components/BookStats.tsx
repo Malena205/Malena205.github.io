@@ -1,5 +1,5 @@
 import React from 'react';
-import MonthlyColumns from './charts/MonthlyColumns';
+import Columns, { monthColumns } from './charts/Columns';
 import RankedBars from './charts/RankedBars';
 import { plural } from '../lib/dates';
 import { authorSampleSize, averageRating, booksByMonth, ratedCount, ratingDistribution, topAuthors } from '../lib/books';
@@ -54,7 +54,12 @@ const BookStats = () => {
       {booksByMonth.length > 0 && (
         <div className="mt-8 sm:w-1/2 sm:pr-6">
           <h3 className="text-lg mb-3">Books finished per month</h3>
-          <MonthlyColumns data={booksByMonth} unit={['book', 'books']} caption="Books finished per month" />
+          <Columns
+            data={monthColumns(booksByMonth).columns}
+            unit={['book', 'books']}
+            periodName="Month"
+            caption="Books finished per month"
+          />
         </div>
       )}
     </section>
