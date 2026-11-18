@@ -23,11 +23,13 @@ const BoardGameStats = () => {
 
   // "Past year" is the 53 weeks the calendar shows, starting on a Monday.
   const yearStart = addDays(today, -weekday(today) - 52 * 7);
-  const from = range === 'year' ? yearStart : firstPlayDate;
-  const summary = useMemo(() => summarizePlays(from, today), [from, today]);
+  const pastYear = useMemo(() => summarizePlays(yearStart, today), [yearStart, today]);
+  const allTime = useMemo(() => summarizePlays(firstPlayDate, today), [today]);
 
   if (!latestPlayDate) return null;
 
+  // The calendar always shows the past year; the switch scopes everything below it.
+  const summary = range === 'year' ? pastYear : allTime;
   const since = range === 'year' ? 'in the past year' : `since ${formatMonthYear(firstPlayDate)}`;
   const tiles = [
     { label: 'Plays', value: summary.totalPlays, note: since },
@@ -37,26 +39,6 @@ const BoardGameStats = () => {
       ? [{ label: 'Busiest day', value: summary.busiestDay.total, note: formatShortDay(summary.busiestDay.date) }]
       : []),
   ];
-
-  const calendars =
-    range === 'year'
-      ? [{ key: 'year', heading: null, from: yearStart, to: today, period: 'the past year' }]
-      : (() => {
-          const years = [];
-          for (let year = Number(today.slice(0, 4)); year >= Number(firstPlayDate.slice(0, 4)); year--) {
-            const yearEnd = `${year}-12-31`;
-            const to = yearEnd < today ? yearEnd : today;
-            const plays = summarizePlays(`${year}-01-01`, to).totalPlays;
-            years.push({
-              key: String(year),
-              heading: `${year} · ${plural(plays, 'play', 'plays')}`,
-              from: `${year}-01-01`,
-              to,
-              period: String(year),
-            });
-          }
-          return years;
-        })();
 
   // The past year usually starts mid-month; leave that partial month out of the monthly chart.
   const months = range === 'year' && !yearStart.endsWith('-01') ? summary.byMonth.slice(1) : summary.byMonth;
@@ -73,25 +55,41 @@ const BoardGameStats = () => {
 
   return (
     <section className="mt-12">
-      <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
-        <h2 className="text-2xl">Play History</h2>
-        <div role="group" aria-label="Time range" className="flex gap-1 text-sm">
-          {RANGES.map((option) => (
-            <button
-              key={option.value}
-              type="button"
-              aria-pressed={range === option.value}
-              onClick={() => setRange(option.value)}
-              className={`rounded-full px-3 py-0.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 ${
-                range === option.value ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100'
-              }`}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
-      </div>
+      <h2 className="text-2xl mb-2">Play History</h2>
       <hr className="mb-4" />
+
+      <CalendarHeatmap days={playsByDay} from={yearStart} to={today} period="the past year" scrollToEnd centered />
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-sm text-gray-500">
+        <span>
+          {plural(pastYear.totalPlays, 'play', 'plays')} on {plural(pastYear.daysPlayed, 'day', 'days')} in the past
+          year
+        </span>
+        <span className="flex items-center gap-3" aria-hidden="true">
+          <span>Plays per day</span>
+          {HEATMAP_LEVELS.map((level) => (
+            <span key={level.label} className="flex items-center gap-1">
+              <span className="inline-block h-3 w-3 rounded-[3px]" style={{ backgroundColor: level.color }} />
+              {level.label}
+            </span>
+          ))}
+        </span>
+      </div>
+
+      <div role="group" aria-label="Time range for the statistics below" className="mt-10 mb-4 flex gap-1 text-sm">
+        {RANGES.map((option) => (
+          <button
+            key={option.value}
+            type="button"
+            aria-pressed={range === option.value}
+            onClick={() => setRange(option.value)}
+            className={`rounded-full px-3 py-0.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 ${
+              range === option.value ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
 
       <dl className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-4">
         {tiles.map((tile) => (
@@ -102,31 +100,6 @@ const BoardGameStats = () => {
           </div>
         ))}
       </dl>
-
-      <div className="mt-8 space-y-4">
-        {calendars.map((calendar) => (
-          <div key={calendar.key}>
-            {calendar.heading && <h3 className="mb-1 text-sm text-gray-500">{calendar.heading}</h3>}
-            <CalendarHeatmap
-              days={playsByDay}
-              from={calendar.from}
-              to={calendar.to}
-              period={calendar.period}
-              scrollToEnd={calendar.to === today}
-              centered={range === 'year'}
-            />
-          </div>
-        ))}
-      </div>
-      <div className="mt-2 flex flex-wrap items-center justify-end gap-3 text-sm text-gray-500" aria-hidden="true">
-        <span>Plays per day</span>
-        {HEATMAP_LEVELS.map((level) => (
-          <span key={level.label} className="flex items-center gap-1">
-            <span className="inline-block h-3 w-3 rounded-[3px]" style={{ backgroundColor: level.color }} />
-            {level.label}
-          </span>
-        ))}
-      </div>
 
       <div className="grid sm:grid-cols-2 gap-12 mt-8">
         <div>
